@@ -53,5 +53,4 @@ Example usage: Simple Activity Monitor
 	});
 	
 
-To see an example of LongPollingBuffer used in a webapp [here][src].
-[src]: http://github.com/robrighter/Node-Activity-Monitor-Without-A-Websocket/blob/master/pollDataServer.js
+To see an example of LongPollingBuffer used in a webapp <a href="http://github.com/robrighter/Node-Activity-Monitor-Without-A-Websocket/blob/master/pollDataServer.js">here.</a>
