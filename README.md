@@ -21,7 +21,7 @@ Pushes data onto the queue which in turn notifies all the listeners
 Adds a listener for data updates. The callback is triggered when data is available after the since.
 
 
-Example usage: Simple Activity Monitor
+Example usage:
 --------------------------------------
 
 	var sys = require('sys');
