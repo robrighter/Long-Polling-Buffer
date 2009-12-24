@@ -24,49 +24,35 @@ Adds a listener for data updates. The callback is triggered when data is availab
 Example usage: Simple Activity Monitor
 --------------------------------------
 
-	var fu = require("./lib/fu");
 	var sys = require('sys');
-	process.mixin(GLOBAL, require("./lib/underscore"));
+	var un = require("./lib/underscore");
 	var lpb = require("./lib/longpollingbuffer");
 	
-	HOST = null; // localhost
-	PORT = 8000;
+	var buffer = new lpb.LongPollingBuffer(8);
 	
-	//helper function
-	String.prototype.trim = function() {
-    	return this.replace(/^\s+|\s+$/g,"");
-	}
+	buffer.push("I'm");
+	buffer.push('affraid');
+	buffer.push('the Death Star');
+	buffer.push('will be');
+	buffer.push('fully');
+	buffer.push('operational');
+	buffer.push('when');
+	buffer.push('your');
+	buffer.push('friends');
+	buffer.push('arrive');
 	
-	// Now start the program
-	fu.listen(PORT, HOST);
-	var rb = new lpb.LongPollingBuffer(200); //Create the Long Polling Buffer
-	var iostat = process.createChildProcess("iostat", ["-w 1"])
 	
-	
-	//Setup the listener to handle the flow of data from iostat 
-	iostat.addListener("output", function (data) {
-    	sys.puts(data);
-    	if(data.search(/cpu/i) == -1){ //suppress the column header from iostat
-        	rb.push(data.trim().split(/\s+/).join(" "));
-    	}
+	//Since forever (or to the size of teh buffer)
+	buffer.addListenerForUpdateSince(-1, function(data){
+     sys.puts('\n\nSince forever (or to the size of the buffer): \n' + _.map(data,JSON.stringify).join(',\n') );
 	});
 	
-	//Setup the updater page for long polling  
-	fu.get("/update", function (req, res) {
-      	res.sendHeader(200,{"Content-Type": "text/html"});
-      	var thesince = parseInt(req.uri.params.since);
-      	if(!thesince){
-          	thesince = -1;
-      	}
-      
-      	rb.addListenerForUpdateSince(thesince, function(data){
-           	var body = '['+_.map(data,JSON.stringify).join(',\n')+']';
-           	res.sendBody( body );
-           	res.finish();
-      	});
+	//Since offset 6
+	buffer.addListenerForUpdateSince(6, function(data){
+     sys.puts('\n\nSince offset 6: \n' + _.map(data,JSON.stringify).join(',\n') );
 	});
-  
-	// Static Files
-	fu.get("/", fu.staticHandler("./client-side/index.html"));
-	fu.get("/css/site.css", fu.staticHandler("./client-side/css/site.css"));
-	fu.get("/js/site.js", fu.staticHandler("./client-side/js/site.js"));
+	
+
+To see an example of LongPollingBuffer used in a webapp [here][src].
+
+	  [src]: http://github.com/robrighter/Node-Activity-Monitor-Without-A-Websocket/blob/master/pollDataServer.js
