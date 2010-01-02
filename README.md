@@ -25,10 +25,9 @@ Example usage:
 --------------------------------------
 
 	var sys = require('sys');
-	var un = require("./lib/underscore");
 	var lpb = require("./lib/longpollingbuffer");
 	
-	var buffer = new lpb.LongPollingBuffer(8);
+	var buffer = new lpb.LongPollingBuffer(8); //create a buffer with a size of 8
 	
 	buffer.push("I'm");
 	buffer.push('affraid');
@@ -42,14 +41,14 @@ Example usage:
 	buffer.push('arrive');
 	
 	
-	//Since forever (or to the size of teh buffer)
+	//Since forever (or to the size of the buffer)
 	buffer.addListenerForUpdateSince(-1, function(data){
-     sys.puts('\n\nSince forever (or to the size of the buffer): \n' + _.map(data,JSON.stringify).join(',\n') );
+     sys.puts('\n\nSince forever (or to the size of the buffer): \n' + data.map(JSON.stringify).join(',\n') );
 	});
 	
 	//Since offset 6
 	buffer.addListenerForUpdateSince(6, function(data){
-     sys.puts('\n\nSince offset 6: \n' + _.map(data,JSON.stringify).join(',\n') );
+     sys.puts('\n\nSince offset 6: \n' + data.map(JSON.stringify).join(',\n') );
 	});
 	
 
