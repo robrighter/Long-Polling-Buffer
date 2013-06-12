@@ -1,0 +1,32 @@
+{
+  "name"        : "longpollingbuffer",
+  "version"     : "1.0.0",
+  "description" : "Makes comet AJAX long polling simple",
+  "url"         : "https://github.com/robrighter/Long-Polling-Buffer",
+  "license"     : "MIT",
+  "keywords"    : ["polling", "longpolling"],
+  "author" : {
+    "name" : "Rob Righter",
+    "email": "robrighter@gmail.com",
+    "url"  : "http://robrighter.com/"
+  },
+  "contributors" : [
+    {
+      "name" : "Pelle Wessman",
+      "email": "pelle@kodfabrik.se",
+      "url"  : "http://kodfabrik.se/"
+    }
+  ],
+  "repository" : {
+    "type" : "git",
+    "url"  : "git://github.com/robrighter/Long-Polling-Buffer.git"
+  },
+  "engines" :  {
+    "node": "*",
+    "npm": "1.1.x"
+  },
+  "main" : "./lib/longpollingbuffer",
+  "directories" : {
+    "lib": "./lib"
+  }
+}
