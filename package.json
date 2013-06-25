@@ -23,7 +23,7 @@
   },
   "engines" :  {
     "node": "*",
-    "npm": "1.1.x"
+    "npm": "1.2.x"
   },
   "main" : "./lib/longpollingbuffer",
   "directories" : {
